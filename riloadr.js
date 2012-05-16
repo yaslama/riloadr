@@ -412,7 +412,7 @@
      */
     function getImageSrc(img, base, imgSize, reload) {
         var src = (img.getAttribute('data-base') || base) +
-            (img.getAttribute('data-src') || EMPTYSTRING);
+            (randomSrc(img.getAttribute('data-src')) || EMPTYSTRING);
         
         if (reload) {
             src += (QUESTION_MARK_REGEX.test(src) ? '&' : '?') + 
@@ -536,6 +536,12 @@
 
     function removeEvent(elem, type, fn) {
         elem[rem](pre + type, fn, FALSE);
+    }
+
+    function randomSrc(src) {
+        if (!src) return src;
+        var srcArray = src.split('|');
+        return srcArray[Math.floor(Math.random() * srcArray.length)];
     }
     
     
